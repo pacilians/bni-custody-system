@@ -53,7 +53,9 @@ export const columns: ColumnDef<Customer>[] = [
     },
     cell: ({ row }) => {
       const createdAt = row.getValue("created_at");
-      const formatted = dayjs(createdAt).format("DD/MM/YYYY HH:mm:ss");
+      const formatted = dayjs(createdAt as string).format(
+        "DD/MM/YYYY HH:mm:ss",
+      );
       return <div>{formatted}</div>;
     },
   },
@@ -75,7 +77,9 @@ export const columns: ColumnDef<Customer>[] = [
       if (updatedAt === null) {
         return <div>Not yet modified</div>;
       }
-      const formatted = dayjs(updatedAt).format("DD/MM/YYYY HH:mm:ss");
+      const formatted = dayjs(updatedAt as string).format(
+        "DD/MM/YYYY HH:mm:ss",
+      );
       return <div>{formatted}</div>;
     },
   },
