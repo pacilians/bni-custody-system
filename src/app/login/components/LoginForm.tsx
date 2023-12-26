@@ -30,7 +30,7 @@ export default function LoginForm() {
           toast.promise(login(formData), {
             loading: "Logging in...",
             success: (data) => {
-              router.push("/dashboard");
+              router.push("/database");
               return `Login successful. Welcome back, ${data.data.user.name}!`;
             },
             error: (err) => {
