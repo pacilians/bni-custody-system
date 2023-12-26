@@ -16,13 +16,32 @@ import {
 import { Input } from "@/components/ui/input";
 
 // libs
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function LoginForm() {
   const form = useForm();
+  const router = useRouter();
+
   return (
     <Form {...form}>
-      <form action={login} className="space-y-8">
+      <form
+        action={async (formData: FormData) => {
+          toast.promise(login(formData), {
+            loading: "Logging in...",
+            success: (data) => {
+              router.push("/dashboard");
+              return `Login successful. Welcome back, ${data.data.user.name}!`;
+            },
+            error: (err) => {
+              const errorObj = JSON.parse(err.message);
+              return `Login failed: ${errorObj.message}`;
+            },
+          });
+        }}
+        className="space-y-8"
+      >
         <FormField
           control={form.control}
           name="email"
