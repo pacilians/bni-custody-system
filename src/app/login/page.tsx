@@ -6,13 +6,13 @@ import LoginForm from "./components/LoginForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "BNI Custody System",
-  description: "BNI custody system",
+  title: "Login | BNI Custody System",
+  description: "Login to BNI custody system",
 };
 
 export default function Login() {
   return (
-    <main className="relative flex h-svh items-center justify-center">
+    <main className="relative flex h-svh items-center justify-center px-10">
       <div className="absolute right-4 top-4">
         <ThemeSwitcher />
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 // actions
-import { login } from "../action";
+import { login } from "../actions";
 
 // component
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -40,16 +39,21 @@ export default function LoginForm() {
             },
           });
         }}
-        className="space-y-8"
+        className="flex w-full max-w-sm flex-col gap-3"
       >
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="Email" required {...field} />
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  required
+                  {...field}
+                  className="border-gray-200 bg-white px-5 dark:border-gray-900 dark:bg-gray-900/60"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -60,20 +64,27 @@ export default function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
                   type="password"
                   placeholder="Password"
                   required
                   {...field}
+                  className="border-gray-200 bg-white px-5 dark:border-gray-900 dark:bg-gray-900/60"
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button
+          type="submit"
+          variant="ghost"
+          className="group mt-6 gap-1.5 *:transition hover:bg-gray-200 dark:hover:bg-slate-900"
+        >
+          <p className="translate-x-[13px] group-hover:translate-x-0">Log in</p>
+          <i className="i-ph-arrow-circle-right size-5 -translate-x-[13px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
+        </Button>
       </form>
     </Form>
   );
