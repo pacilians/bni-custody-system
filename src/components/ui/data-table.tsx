@@ -24,21 +24,26 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   searchParameter?: string;
+  links?: boolean;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   searchParameter,
+  links = false,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const table = useReactTable({
     data,
@@ -74,7 +79,7 @@ export function DataTable<TData, TValue>({
           />
         </div>
       )}
-      <div className="rounded-md border">
+      <div className="rounded-md border border-gray-300 *:*:*:*:border-gray-300 dark:border-gray-800 *:*:*:*:dark:border-gray-800">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -100,7 +105,11 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="group"
+                  className="group cursor-pointer"
+                  onClick={() => {
+                    const item = row.original as any;
+                    router.push(pathname + "/" + item.id);
+                  }}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

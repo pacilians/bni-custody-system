@@ -4,7 +4,6 @@
 import { login } from "../actions";
 
 // component
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,6 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import SubmitButton from "./SubmitButton";
 
 // libs
 import { useRouter } from "next/navigation";
@@ -20,8 +20,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export default function LoginForm() {
-  const form = useForm();
   const router = useRouter();
+  const form = useForm();
 
   return (
     <Form {...form}>
@@ -77,14 +77,7 @@ export default function LoginForm() {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          variant="ghost"
-          className="group mt-6 gap-1.5 *:transition hover:bg-gray-200 dark:hover:bg-slate-900"
-        >
-          <p className="translate-x-[13px] group-hover:translate-x-0">Log in</p>
-          <i className="i-ph-arrow-circle-right size-5 -translate-x-[13px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
-        </Button>
+        <SubmitButton />
       </form>
     </Form>
   );

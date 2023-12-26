@@ -6,8 +6,8 @@ type BniLogoProps = {
 };
 
 export default function BniLogo({
-  pictogram = "fill-logo-pictogram",
-  wordmark = "fill-logo-wordmark",
+  pictogram = "fill-[#F15A23]",
+  wordmark = "fill-[#005E6A] dark:fill-white",
   showWordmark = false,
   className = "",
 }: BniLogoProps) {

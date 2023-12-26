@@ -9,8 +9,9 @@ export async function getData() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token || '',
+      Authorization: token || "",
     },
+    next: { revalidate: 60 }, // Revalidate every 60 seconds
   });
 
   if (!res.ok) {
