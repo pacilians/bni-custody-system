@@ -16,14 +16,15 @@ import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
-export type Customer = {
+export type File = {
   id: string;
   name: string;
   createdAt: string;
   updatedAt: string;
+  exist: number;
 };
 
-export const columns: ColumnDef<Customer>[] = [
+export const columns: ColumnDef<File>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -32,7 +33,7 @@ export const columns: ColumnDef<Customer>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Customer
+          File name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -75,7 +76,11 @@ export const columns: ColumnDef<Customer>[] = [
     cell: ({ row }) => {
       const updatedAt = row.getValue("updated_at");
       if (updatedAt === null) {
-        return <div>Unmodified</div>;
+        const createdAt = row.getValue("created_at");
+        const formatted = dayjs(createdAt as string).format(
+          "DD/MM/YYYY HH:mm:ss",
+        );
+        return <div>{formatted}</div>;
       }
       const formatted = dayjs(updatedAt as string).format(
         "DD/MM/YYYY HH:mm:ss",
@@ -86,7 +91,7 @@ export const columns: ColumnDef<Customer>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const customer = row.original;
+      const file = row.original;
 
       return (
         <DropdownMenu>
@@ -99,13 +104,13 @@ export const columns: ColumnDef<Customer>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(customer.id)}
+              onClick={() => navigator.clipboard.writeText(file.id)}
             >
-              Copy customer ID
+              Copy file ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View customer details</DropdownMenuItem>
+            <DropdownMenuItem>View file</DropdownMenuItem>
+            <DropdownMenuItem>View file details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

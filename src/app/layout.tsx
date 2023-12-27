@@ -17,8 +17,8 @@ import { cn } from "@/lib/utils";
 const figtree = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "BNI Custody System",
-  description: "BNI custody system",
+  title: "Custody System",
+  description: "Custody system",
 };
 
 export default function RootLayout({

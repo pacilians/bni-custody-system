@@ -9,8 +9,8 @@ import { columns } from "./components/Columns";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Database | BNI Custody System",
-  description: "Database of BNI custody system",
+  title: "Database | Custody System",
+  description: "Database of custody system",
 };
 
 export default async function Database() {
@@ -22,6 +22,7 @@ export default async function Database() {
         columns={columns}
         data={data.data.customers}
         searchParameter="name"
+        links
       />
     </main>
   );

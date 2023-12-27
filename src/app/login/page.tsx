@@ -6,8 +6,8 @@ import LoginForm from "./components/LoginForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Login | BNI Custody System",
-  description: "Login to BNI custody system",
+  title: "Login | Custody System",
+  description: "Login to custody system",
 };
 
 export default function Login() {

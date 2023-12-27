@@ -107,8 +107,10 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                   className="group cursor-pointer"
                   onClick={() => {
-                    const item = row.original as any;
-                    router.push(pathname + "/" + item.id);
+                    if (links) {
+                      const item = row.original as any;
+                      router.push(pathname + "/" + item.id);
+                    }
                   }}
                 >
                   {row.getVisibleCells().map((cell) => (
