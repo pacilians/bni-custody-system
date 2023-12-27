@@ -32,6 +32,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   searchParameter?: string;
   links?: boolean;
+  create?: JSX.Element;
 }
 
 export function DataTable<TData, TValue>({
@@ -39,6 +40,7 @@ export function DataTable<TData, TValue>({
   data,
   searchParameter,
   links = false,
+  create,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -63,7 +65,7 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       {searchParameter && (
-        <div className="flex items-center py-4">
+        <div className="flex items-center justify-between py-4">
           <Input
             placeholder={`Search ${searchParameter}...`}
             value={
@@ -77,6 +79,7 @@ export function DataTable<TData, TValue>({
             }
             className="max-w-sm"
           />
+          {create}
         </div>
       )}
       <div className="rounded-md border border-gray-300 *:*:*:*:border-gray-300 dark:border-gray-800 *:*:*:*:dark:border-gray-800">

@@ -2,6 +2,7 @@
 import { getData } from "./actions";
 
 // components
+import Topbar from "@/components/Topbar";
 import { DataTable } from "@/components/ui/data-table";
 import { columns } from "./components/Columns";
 
@@ -18,11 +19,13 @@ export default async function Database() {
 
   return (
     <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
+      <Topbar data={["Database"]} links={["database"]} />
       <DataTable
         columns={columns}
         data={data.data.customers}
         searchParameter="name"
         links
+        
       />
     </main>
   );

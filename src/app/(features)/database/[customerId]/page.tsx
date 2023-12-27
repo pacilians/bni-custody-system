@@ -2,14 +2,14 @@
 import { getData } from "./actions";
 
 // components
+import Topbar from "@/components/Topbar";
 import { DataTable } from "@/components/ui/data-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { columns } from "./components/Columns";
+import UploadFileDialog from "./components/UploadFileDialog";
 
 // libs
 import { Metadata } from "next";
-
-// types
 
 export const metadata: Metadata = {
   title: "Database | Custody System",
@@ -32,6 +32,10 @@ export default async function Customer({
 
   return (
     <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
+      <Topbar
+        data={["Database", data.data.customer.name]}
+        links={["database", params.customerId]}
+      />
       <Tabs defaultValue="mandatory" className="w-full">
         <TabsList>
           <TabsTrigger value="mandatory">Mandatory files</TabsTrigger>
@@ -43,6 +47,7 @@ export default async function Customer({
             data={mandatoryFiles}
             searchParameter="name"
             links
+            create={<UploadFileDialog />}
           />
         </TabsContent>
         <TabsContent value="additional">
@@ -51,6 +56,7 @@ export default async function Customer({
             data={additionalFiles}
             searchParameter="name"
             links
+            create={<UploadFileDialog />}
           />
         </TabsContent>
       </Tabs>
