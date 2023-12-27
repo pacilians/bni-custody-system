@@ -1,8 +1,20 @@
 "use client";
 
+// actions
+import { logout } from "../actions";
+
 // components
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 // libs
 import Link from "next/link";
@@ -63,8 +75,39 @@ export default function Sidebar() {
           </p>
         </Link>
       </div>
-      <div className="self-start px-1">
+      <div className="flex gap-2 self-stretch overflow-hidden p-1">
         <ThemeSwitcher />
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              variant="destructive"
+              className="grow opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            >
+              Log out
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Are you sure you want to log out?</DialogTitle>
+            </DialogHeader>
+            <DialogFooter className="flex">
+              <DialogClose asChild>
+                <Button type="button" variant="secondary" className="w-32">
+                  Close
+                </Button>
+              </DialogClose>
+              <Button
+                variant="destructive"
+                className="w-32"
+                onClick={() => {
+                  logout();
+                }}
+              >
+                Log out
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </nav>
   );

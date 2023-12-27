@@ -17,6 +17,7 @@ export async function login(formData: FormData) {
       email: rawFormData.email,
       password: rawFormData.password,
     }),
+    cache: "no-store",
   });
 
   if (!res.ok) {
