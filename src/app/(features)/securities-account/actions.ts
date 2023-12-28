@@ -44,7 +44,7 @@ export async function getDetailSecurities(id: any) {
 
 export async function createSecurities(formData: FormData) {
   const token = cookies().get("token")?.value;
-  const res = await fetch(`http://bnicustody.site:8000/user`, {
+  const res = await fetch(`http://bnicustody.site:8000/security-account`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export async function updateSecurities(formData: FormData, id: any) {
     description: formData.get("description"),
     role: formData.get("role"),
   });
-  const res = await fetch(`http://bnicustody.site:8000/user/${id}`, {
+  const res = await fetch(`http://bnicustody.site:8000/=security-account/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -106,7 +106,7 @@ export async function updateSecurities(formData: FormData, id: any) {
 
 export async function deleteSecurities(id: any) {
   const token = cookies().get("token")?.value;
-  const res = await fetch(`http://bnicustody.site:8000/user/${id}`, {
+  const res = await fetch(`http://bnicustody.site:8000/security-account/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

@@ -24,7 +24,6 @@ export default async function Database() {
         data={data.data.customers}
         searchParameter="name"
         links
-        
       />
     </main>
   );

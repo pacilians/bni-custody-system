@@ -3,7 +3,9 @@ import { getUsers } from "./actions";
 
 // components
 import Topbar from "@/components/Topbar";
+import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
+import Link from "next/link";
 import { columns } from "./columns";
 
 // libs
@@ -25,6 +27,16 @@ export default async function UserManagement() {
         data={data.data.users}
         searchParameter="name"
         links={false}
+        create={
+          <Button asChild>
+            <Link
+              href="/user-management/create"
+              className="w-15 group mt-6 gap-1.5 *:transition hover:bg-gray-200 dark:hover:bg-slate-900"
+            >
+              +
+            </Link>
+          </Button>
+        }
       />
     </main>
   );
