@@ -37,7 +37,7 @@ export default function CreateForm({ initialData }: any) {
   }, [initialData]);
 
   return (
-    <section className="bg-base-200 flex w-full justify-center rounded-3xl p-10 shadow-2xl">
+    <section className="bg-base-200 flex w-full justify-center rounded-3xl p-10 shadow-md">
       <Form {...form}>
         <form
           action={async (formData: FormData) => {

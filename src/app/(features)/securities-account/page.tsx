@@ -1,30 +1,30 @@
 // actions
-import { getData } from "./actions";
+import { getSecurities } from "./actions";
 
 // components
 import Topbar from "@/components/Topbar";
 import { DataTable } from "@/components/ui/data-table";
-import { columns } from "./components/Columns";
+import { columns } from "./columns";
 
 // libs
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Database | Custody System",
-  description: "Database of custody system",
+  title: "User Management | Custody System",
+  description: "User Management of custody system",
 };
 
-export default async function Database() {
-  const data = await getData();
+export default async function UserManagement() {
+  const data = await getSecurities();
+
   return (
     <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
-      <Topbar data={["Database"]} links={["database"]} />
+      <Topbar data={["Securities Account"]} links={["securities-account"]} />
       <DataTable
         columns={columns}
-        data={data.data.customers}
+        data={data.data.securitiesAccounts}
         searchParameter="name"
-        links
-        
+        links={false}
       />
     </main>
   );

@@ -44,7 +44,7 @@ export default function Service({ initialData }: any) {
   }, [initialData]);
 
   return (
-    <section className="bg-base-200 basis-1/2 rounded-3xl p-10 shadow-2xl">
+    <section className="bg-base-200 basis-1/2 rounded-3xl p-10 shadow-md">
       <div className="flex items-center justify-between pb-2">
         <h1 className="mb-4 text-xl font-bold">Service Category</h1>
         {/* Add Service */}
@@ -70,8 +70,7 @@ export default function Service({ initialData }: any) {
                       return "Sucessful add service category";
                     },
                     error: (err) => {
-                      const errorObj = JSON.parse(err.message);
-                      return `failed: ${errorObj.message}`;
+                      return `Failed add service category`;
                     },
                   });
                   form.reset();

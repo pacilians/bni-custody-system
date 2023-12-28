@@ -16,12 +16,38 @@ import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
-export type Customer = {
-  id: string;
+export type DOB = {
   name: string;
+  npp: string;
+  role: string;
+  description: string;
+  photo: null | string;
+  birth_date: any;
+}
+
+export type BankAccount = {
+  number: string;
+  name: string;
+}
+
+export type Customer = {
+  id: any;
+  name: string;
+  address: string;
+  telephone: string;
+  expiry_date: any;
+  business_category: string;
+  service: string;
+  key_person_name: string;
+  key_person_dob: string;
+  key_person_hp: string;
+  email: string;
+  board_of_director: DOB[];
+  bank_account: BankAccount[];
   createdAt: string;
   updatedAt: string;
-};
+}
+
 
 export const columns: ColumnDef<Customer>[] = [
   {

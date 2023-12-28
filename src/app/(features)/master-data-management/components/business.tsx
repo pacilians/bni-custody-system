@@ -43,7 +43,7 @@ export default function Business({ initialData }: any) {
   }, [initialData]);
 
   return (
-    <section className="bg-base-200 basis-1/2 rounded-3xl p-10 shadow-2xl">
+    <section className="bg-base-200 basis-1/2 rounded-3xl p-10 shadow-md">
       <div className="flex items-center justify-between pb-2">
         <h1 className="mb-4 text-xl font-bold">Business Category</h1>
         {/* Add Service */}
@@ -69,8 +69,7 @@ export default function Business({ initialData }: any) {
                       return "Sucessful add business category";
                     },
                     error: (err) => {
-                      const errorObj = JSON.parse(err.message);
-                      return `failed: ${errorObj.message}`;
+                      return `Failed add business category`;
                     },
                   });
                   form.reset();

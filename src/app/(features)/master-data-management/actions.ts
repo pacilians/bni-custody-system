@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-export async function getData() {
+export async function getMasterData() {
   const token = cookies().get("token")?.value;
   const res = await fetch(`http://bnicustody.site:8000/master-data/`, {
     method: "GET",

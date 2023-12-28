@@ -1,5 +1,5 @@
 // actions
-import { getData } from "./actions";
+import { getMasterData } from "./actions";
 
 // components
 import Mandatory from "./components/mandatory";
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default async function MasterDataManagement() {
-  const data = await getData();
+  const data = await getMasterData();
   return (
     <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
       <Topbar data={["Master Data Management"]} links={["master-data-management"]} />

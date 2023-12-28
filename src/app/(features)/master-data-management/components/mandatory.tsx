@@ -48,7 +48,7 @@ export default function Mandatory({ initialData }: any) {
   }, [initialData]);
   return (
     <div className="">
-      <div className="bg-base-200 h-full w-full rounded-3xl p-10 shadow-2xl">
+      <div className="bg-base-200 h-full w-full rounded-3xl p-10 shadow-md">
         <div className="flex items-center justify-between pb-2">
           <h1 className="mb-4 text-xl font-bold">Mandatory File Category</h1>
           {/* Add Mandatory File */}
@@ -74,8 +74,7 @@ export default function Mandatory({ initialData }: any) {
                         return "Sucessful add mandatory file";
                       },
                       error: (err) => {
-                        const errorObj = JSON.parse(err.message);
-                        return `failed: ${errorObj.message}`;
+                        return `Failed add mandatory file`;
                       },
                     });
                     form.reset();
@@ -149,8 +148,7 @@ export default function Mandatory({ initialData }: any) {
                               return "Sucessful update mandatory file";
                             },
                             error: (err) => {
-                              const errorObj = JSON.parse(err.message);
-                              return `failed: ${errorObj.message}`;
+                              return `Failed update mandatory file`;
                             },
                           });
                         }}
