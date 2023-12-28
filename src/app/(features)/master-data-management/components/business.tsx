@@ -1,8 +1,5 @@
 "use client";
-import {
-  handleAddBusiness,
-  handleDeleteBusiness
-} from "../actions";
+import { handleAddBusiness, handleDeleteBusiness } from "../actions";
 
 // componets
 import { Button } from "@/components/ui/button";
@@ -32,9 +29,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 type Business = {
-    id: number;
-    name: string;
-  };
+  id: number;
+  name: string;
+};
 export default function Business({ initialData }: any) {
   const [data, setData] = useState<Business[]>([]);
   const router = useRouter();
@@ -45,10 +42,9 @@ export default function Business({ initialData }: any) {
     setData(initialData);
   }, [initialData]);
 
-
   return (
-    <section className="basis-1/2 rounded-3xl bg-base-200 p-10 shadow-2xl">
-            <div className="flex items-center justify-between pb-2">
+    <section className="bg-base-200 basis-1/2 rounded-3xl p-10 shadow-2xl">
+      <div className="flex items-center justify-between pb-2">
         <h1 className="mb-4 text-xl font-bold">Business Category</h1>
         {/* Add Service */}
         <Dialog>

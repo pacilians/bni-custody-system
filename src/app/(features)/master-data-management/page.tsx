@@ -5,6 +5,7 @@ import { getData } from "./actions";
 import Mandatory from "./components/mandatory";
 import Business from "./components/business";
 import Service from "./components/service";
+import Topbar from "@/components/Topbar";
 
 // libs
 import { Metadata } from "next";
@@ -18,6 +19,7 @@ export default async function MasterDataManagement() {
   const data = await getData();
   return (
     <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
+      <Topbar data={["Master Data Management"]} links={["master-data-management"]} />
       <Mandatory initialData={data.data.data.mandatory} />
 
       {/* Service + Business Category */}
