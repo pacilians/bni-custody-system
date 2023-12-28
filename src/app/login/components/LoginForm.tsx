@@ -24,7 +24,11 @@ export default function LoginForm() {
   const form = useForm();
 
   return (
-    <Form {...form}>
+  <div className="flex flex-col">
+  <p className="text-3xl font-semibold text-center mb-8">
+    Custody System
+  </p>
+      <Form {...form}>
       <form
         action={async (formData: FormData) => {
           toast.promise(login(formData), {
@@ -80,5 +84,6 @@ export default function LoginForm() {
         <SubmitButton />
       </form>
     </Form>
+  </div>
   );
 }
