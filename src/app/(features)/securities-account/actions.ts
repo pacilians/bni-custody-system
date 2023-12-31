@@ -8,7 +8,7 @@ export async function getSecurities() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token || "",
+      Authorization: token ?? "",
     },
     cache: "no-store",
     // next: { revalidate: 60, tags: ["master-data-management"],  },
@@ -28,7 +28,7 @@ export async function getDetailSecurities(id: any) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token || "",
+      Authorization: token ?? "",
     },
     cache: "no-store",
     // next: { revalidate: 60, tags: ["master-data-management"],  },
@@ -48,7 +48,7 @@ export async function createSecurities(formData: FormData) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token || "",
+      Authorization: token ?? "",
     },
     body: JSON.stringify({
       name: formData.get("name"),
@@ -82,7 +82,7 @@ export async function updateSecurities(formData: FormData, id: any) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token || "",
+      Authorization: token ?? "",
     },
     body: JSON.stringify({
       name: formData.get("name"),
@@ -110,7 +110,7 @@ export async function deleteSecurities(id: any) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token || "",
+      Authorization: token ?? "",
     },
     cache: "no-store",
     // next: { revalidate: 60, tags: ["master-data-management"],  },

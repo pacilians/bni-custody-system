@@ -9,9 +9,8 @@ export async function getData() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token || "",
+      Authorization: token ?? "",
     },
-    cache: "no-store",
     next: { revalidate: 60 }, // Revalidate every 60 seconds
   });
 
@@ -48,7 +47,7 @@ export async function addCustomer(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token || "",
+      Authorization: token ?? "",
     },
     body: JSON.stringify(payload),
     cache: "no-store"

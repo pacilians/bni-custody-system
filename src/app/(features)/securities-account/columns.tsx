@@ -257,7 +257,7 @@ export const columns: ColumnDef<Securities>[] = [
                   "|" +
                   current.no_rekening_investor +
                   "|" +
-                  (current.nama_perusahaan ||
+                  (current.nama_perusahaan ??
                     current.nama_awal +
                       (current.nama_tengah
                         ? " " + current.nama_tengah + " "

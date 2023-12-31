@@ -8,7 +8,7 @@ export async function getMasterData() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token || "",
+      Authorization: token ?? "",
     },
     cache: "no-store",
     // next: { revalidate: 60, tags: ["master-data-management"],  },
@@ -114,7 +114,7 @@ export async function handleDeleteBusiness(current: any) {
         "Content-Type": "application/json",
       },
     },
-  );  
+  );
 
   if (!res.ok) {
     throw new Error(await res.text());

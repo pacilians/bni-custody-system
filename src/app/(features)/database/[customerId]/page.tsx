@@ -1,12 +1,14 @@
 // actions
-import { getData } from "./actions";
+import { getData, getMasterData } from "./actions";
 
 // components
 import Topbar from "@/components/Topbar";
 import { DataTable } from "@/components/ui/data-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { columns } from "./components/Columns";
-import UploadFileDialog from "./components/UploadFileDialog";
+import UploadFileDialog, {
+  MasterDataItem,
+} from "./components/UploadFileDialog";
 
 // libs
 import { Metadata } from "next";
@@ -22,6 +24,7 @@ export default async function Customer({
   params: { customerId: string };
 }>) {
   const data = await getData(params.customerId);
+  const masterData = await getMasterData();
 
   const mandatoryFiles = data.data.customer.mandatory_file.filter(
     (file: { exist: number }) => file.exist === 1,
@@ -47,7 +50,11 @@ export default async function Customer({
             data={mandatoryFiles}
             searchParameter="name"
             links
-            create={<UploadFileDialog />}
+            create={
+              <UploadFileDialog
+                masterData={masterData.data.data.mandatory as MasterDataItem[]}
+              />
+            }
           />
         </TabsContent>
         <TabsContent value="additional">
@@ -56,7 +63,11 @@ export default async function Customer({
             data={additionalFiles}
             searchParameter="name"
             links
-            create={<UploadFileDialog />}
+            create={
+              <UploadFileDialog
+                masterData={masterData.data.data.mandatory as MasterDataItem[]}
+              />
+            }
           />
         </TabsContent>
       </Tabs>

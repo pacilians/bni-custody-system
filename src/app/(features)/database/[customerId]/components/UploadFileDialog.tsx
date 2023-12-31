@@ -1,12 +1,13 @@
 "use client";
 
+// actions
+import { uploadFile } from "../actions";
+
 // components
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -14,23 +15,45 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import UploadFileButton from "./UploadFileButton";
 
 //   libs
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
-export default function UploadFileDialog() {
+// utils
+import { cn } from "@/lib/utils";
+
+export type MasterDataItem = {
+  id: number;
+  name: string;
+};
+
+export default function UploadFileDialog({
+  masterData,
+}: Readonly<{
+  masterData: MasterDataItem[];
+}>) {
   const form = useForm();
+  const [open, setOpen] = useState(false);
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="gap-1.5 bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-white dark:hover:bg-orange-600">
           <i className="i-ph-upload-simple-bold size-4" />
@@ -39,87 +62,92 @@ export default function UploadFileDialog() {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
+          <DialogTitle>Upload new file</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form
             action={async (formData: FormData) => {
-              //   toast.promise(login(formData), {
-              //     loading: "Logging in...",
-              //     success: (data) => {
-              //       router.push("/database");
-              //       return `Login successful. Welcome back, ${data.data.user.name}!`;
-              //     },
-              //     error: (err) => {
-              //       const errorObj = JSON.parse(err.message);
-              //       return `Login failed: ${errorObj.message}`;
-              //     },
-              //   });
+              toast.promise(uploadFile(formData), {
+                loading: "Uploading file...",
+                success: (data) => {
+                  setOpen(false);
+                  return `${data.data.name} successfully uploaded!`;
+                },
+                error: (err) => {
+                  const errorObj = JSON.parse(err.message);
+                  return `Upload failed: ${errorObj.message}`;
+                },
+              });
             }}
-            className="flex w-full max-w-sm flex-col gap-3"
+            className="flex w-full flex-col gap-3"
           >
+            <Tabs defaultValue="mandatory" className="w-full">
+              <TabsList className="mb-5 flex">
+                <TabsTrigger value="mandatory" className="grow">
+                  Mandatory
+                </TabsTrigger>
+                <TabsTrigger value="password" className="grow">
+                  Additional
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="mandatory">
+                <FormField
+                  control={form.control}
+                  name="mandatoryType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Mandatory file type</FormLabel>
+                      <Select {...field} required>
+                        <SelectTrigger
+                          className={cn(
+                            buttonVariants({ variant: "outline" }),
+                            "justify-between",
+                          )}
+                        >
+                          <SelectValue placeholder="Select type..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {masterData.map((masterDataItem: any) => (
+                            <SelectItem
+                              key={masterDataItem.id}
+                              value={masterDataItem.name}
+                              className="cursor-pointer"
+                            >
+                              {masterDataItem.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormItem>
+                  )}
+                />
+              </TabsContent>
+            </Tabs>
             <FormField
               control={form.control}
-              name="fileType"
+              name="file"
               render={({ field }) => (
-                <FormItem className="flex flex-col gap-1.5">
-                  <FormLabel>File type</FormLabel>
-                  <FormControl>
-                    <Tabs
-                      onValueChange={field.onChange}
-                      defaultValue="mandatory"
-                      className="flex flex-col space-y-1"
-                    >
-                      <TabsList>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <TabsTrigger value="mandatory">
-                              Mandatory
-                            </TabsTrigger>
-                          </FormControl>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <TabsTrigger value="additional">
-                              Additional
-                            </TabsTrigger>
-                          </FormControl>
-                        </FormItem>
-                      </TabsList>
-                    </Tabs>
+                <FormItem>
+                  <FormLabel htmlFor="file">File</FormLabel>
+                  <FormControl className="flex flex-col gap-1.5">
+                    <Input
+                      id="file"
+                      type="file"
+                      accept=".pdf"
+                      max-size="5242880"
+                      required
+                      {...field}
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormDescription>
+                    Please only upload PDFs. Maximum 5mb.
+                  </FormDescription>
                 </FormItem>
               )}
             />
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="fileType">File</Label>
-              <Tabs defaultValue="mandatory" className="w-full">
-                <TabsList>
-                  <TabsTrigger value="mandatory">Mandatory</TabsTrigger>
-                  <TabsTrigger value="additional">Additional</TabsTrigger>
-                </TabsList>
-                <TabsContent value="mandatory">
-                  <Input id="fileType" type="text" required />
-                </TabsContent>
-                <TabsContent value="additional">
-                  <Input id="fileType" type="text" required />
-                </TabsContent>
-              </Tabs>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="file">File</Label>
-              <Input id="file" type="file" required />
-            </div>
+            <UploadFileButton />
           </form>
         </Form>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
