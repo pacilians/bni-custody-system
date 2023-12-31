@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default async function UserManagement() {
   return (
     <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
-      <Topbar data={["User Management"]} links={["user-management"]} />
+      <Topbar data={["User Management", "Create User"]} links={["user-management", "/create"]} />
       <CreateForm/>
     </main>
   );

@@ -20,7 +20,7 @@ export default async function UserManagement() {
   const data = await getSecurities();
 
   return (
-    <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
+    <main className="relative flex min-h-svh grow overflow-auto flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
       <Topbar data={["Securities Account"]} links={["securities-account"]} />
       <DataTable
         columns={columns}
@@ -28,12 +28,9 @@ export default async function UserManagement() {
         searchParameter="name"
         links={false}
         create={
-          <Button asChild>
-            <Link
-              href="/securities-account/create"
-              className="w-15 group mt-6 gap-1.5 *:transition hover:bg-gray-200 dark:hover:bg-slate-900"
-            >
-              +
+          <Button className="gap-1.5 bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-white dark:hover:bg-orange-600">
+            <Link href="/securities-account/create">
+              <p>Add</p>
             </Link>
           </Button>
         }

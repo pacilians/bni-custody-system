@@ -74,7 +74,7 @@ export default function CreateForm({ service, business }: any) {
 
             <FormField
               control={form.control}
-              name="adress"
+              name="address"
               render={({ field }) => (
                 <FormItem className="w-1/3">
                   <label className="mb-2 block font-bold" htmlFor="name">

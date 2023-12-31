@@ -58,8 +58,6 @@ export async function addCustomer(
     throw new Error(await res.text());
   }
   const data = await res.json();
-  console.log('AMAN');
-
   // revalidateTag('master-data-management')
   return data;
 }

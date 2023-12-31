@@ -28,12 +28,9 @@ export default async function UserManagement() {
         searchParameter="name"
         links={false}
         create={
-          <Button asChild>
-            <Link
-              href="/user-management/create"
-              className="w-15 group mt-6 gap-1.5 *:transition hover:bg-gray-200 dark:hover:bg-slate-900"
-            >
-              +
+          <Button className="gap-1.5 bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-white dark:hover:bg-orange-600">
+            <Link href="/user-management/create">
+              <p>Add</p>
             </Link>
           </Button>
         }

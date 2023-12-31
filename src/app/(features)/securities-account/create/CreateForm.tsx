@@ -27,7 +27,7 @@ type Service = {
   name: string;
 };
 
-export default function CreateForm({ service, business }: any) {
+export default function CreateForm() {
   const router = useRouter();
   const form = useForm();
   const { pending } = useFormStatus();
@@ -239,11 +239,11 @@ export default function CreateForm({ service, business }: any) {
                       <SelectValue placeholder="Services" />
                     </SelectTrigger>
                     <SelectContent>
-                      {service.map((obj: any, key: any) => (
+                      {/* {service.map((obj: any, key: any) => (
                         <SelectItem key={key} value={obj.name}>
                           {obj.name}
                         </SelectItem>
-                      ))}
+                      ))} */}
                     </SelectContent>
                   </Select>
 
@@ -265,11 +265,11 @@ export default function CreateForm({ service, business }: any) {
                       <SelectValue placeholder="Business" />
                     </SelectTrigger>
                     <SelectContent>
-                      {business.map((obj: any, key: any) => (
+                      {/* {business.map((obj: any, key: any) => (
                         <SelectItem key={key} value={obj.name}>
                           {obj.name}
                         </SelectItem>
-                      ))}
+                      ))} */}
                     </SelectContent>
                   </Select>
 

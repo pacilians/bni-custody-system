@@ -3,7 +3,9 @@ import { getData } from "./actions";
 
 // components
 import Topbar from "@/components/Topbar";
+import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
+import Link from "next/link";
 import { columns } from "./components/Columns";
 
 // libs
@@ -24,6 +26,13 @@ export default async function Database() {
         data={data.data.customers}
         searchParameter="name"
         links
+        create={
+          <Button className="gap-1.5 bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-white dark:hover:bg-orange-600">
+            <Link href="/database/create">
+              <p>Add</p>
+            </Link>
+          </Button>
+        }
       />
     </main>
   );
