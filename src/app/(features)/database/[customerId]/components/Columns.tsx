@@ -107,7 +107,7 @@ export const columns = <TData extends {}>(
             <Button
               variant="outline"
               size="icon"
-              className="translate-x-5 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+              className="origin-right scale-50 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100"
               onClick={(e) => {
                 e.stopPropagation();
               }}

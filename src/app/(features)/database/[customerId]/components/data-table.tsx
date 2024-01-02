@@ -109,7 +109,7 @@ export function DataTable<TData extends {}, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="group cursor-pointer overflow-hidden"
+                  className="group cursor-pointer"
                   onClick={() => {
                     if (links) {
                       const item = row.original as any;

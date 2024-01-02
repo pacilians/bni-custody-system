@@ -29,7 +29,7 @@ export async function getData(customerId: string) {
 export async function getMasterData() {
   const res = await fetch(`http://bnicustody.site:8000/master-data`, {
     method: "GET",
-    next: { revalidate: 60 }, // Revalidate every 60 seconds
+    next: { revalidate: 60, tags: ["masterData"] },
   });
 
   if (!res.ok) {

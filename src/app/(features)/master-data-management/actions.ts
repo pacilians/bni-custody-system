@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function getMasterData() {
@@ -38,7 +39,7 @@ export async function handleAddMandatory(formData: FormData) {
   }
   const data = await res.json();
 
-  // revalidateTag('master-data-management')
+  revalidateTag("masterData");
   return data;
 }
 
@@ -146,11 +147,10 @@ export async function handleAddService(formData: FormData) {
 }
 
 export async function handleDeleteService(current: any) {
-
   const res = await fetch(
     `http://bnicustody.site:8000/master-data/service/${current.id}`,
     {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
