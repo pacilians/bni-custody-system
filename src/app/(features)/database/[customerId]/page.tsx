@@ -5,7 +5,6 @@ import { getData, getMasterData } from "./actions";
 import Topbar from "@/components/Topbar";
 import { DataTable } from "./components/data-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { columns } from "./components/Columns";
 import UploadFileDialog, {
   MasterDataItem,
 } from "./components/UploadFileDialog";
@@ -46,7 +45,6 @@ export default async function Customer({
         </TabsList>
         <TabsContent value="mandatory">
           <DataTable
-            columns={columns}
             data={mandatoryFiles}
             searchParameter="name"
             links
@@ -59,7 +57,6 @@ export default async function Customer({
         </TabsContent>
         <TabsContent value="additional">
           <DataTable
-            columns={columns}
             data={additionalFiles}
             searchParameter="name"
             links

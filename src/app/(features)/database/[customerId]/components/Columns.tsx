@@ -1,20 +1,25 @@
 "use client";
 
+// actions
+import { deleteFile } from "../actions";
+
 // components
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 // libs
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
+import { toast } from "sonner";
 
 export type File = {
   id: string;
@@ -24,7 +29,10 @@ export type File = {
   exist: number;
 };
 
-export const columns: ColumnDef<File>[] = [
+export const columns = <TData extends {}>(
+  open: boolean,
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+): ColumnDef<TData>[] => [
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -91,28 +99,61 @@ export const columns: ColumnDef<File>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const file = row.original;
+      const file = row.original as any;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(file.id)}
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              className="translate-x-5 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
             >
-              Copy file ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View file</DropdownMenuItem>
-            <DropdownMenuItem>View file details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <i className="i-ph-trash size-5" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                Are you sure you want to delete {file.name}?
+              </DialogTitle>
+            </DialogHeader>
+            <DialogFooter className="flex">
+              <DialogClose asChild>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="w-32"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  Close
+                </Button>
+              </DialogClose>
+              <Button
+                variant="destructive"
+                className="w-32"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toast.promise(deleteFile(file.id), {
+                    loading: `Deleting ${file.name}...`,
+                    success: () => {
+                      setOpen(false);
+                      return `Successfully deleted ${file.name}!`;
+                    },
+                    error: (err) => `Failed to delete file: ${err.message}`,
+                  });
+                }}
+              >
+                Delete file
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       );
     },
   },

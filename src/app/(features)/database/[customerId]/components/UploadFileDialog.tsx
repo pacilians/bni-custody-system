@@ -71,6 +71,7 @@ export default function UploadFileDialog({
                 loading: "Uploading file...",
                 success: (data) => {
                   setOpen(false);
+                  form.reset();
                   return `${data.data.name} successfully uploaded!`;
                 },
                 error: (err) => {

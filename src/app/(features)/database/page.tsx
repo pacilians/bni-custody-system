@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 
 export default async function Database() {
   const data = await getData();
+
   return (
     <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
       <Topbar data={["Database"]} links={["database"]} />

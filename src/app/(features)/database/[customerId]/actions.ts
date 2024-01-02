@@ -103,3 +103,33 @@ export async function getFile(fileId: string) {
   const data = res.json();
   return data;
 }
+
+export async function deleteFile(fileId: string) {
+  const token = cookies().get("token")?.value;
+  const headersList = headers();
+  const fullUrl = headersList.get("referer") ?? "";
+
+  const fullUrlObj = new URL(fullUrl);
+  const pathSegments = fullUrlObj.pathname.split("/");
+  const customerId = pathSegments[pathSegments.length - 1];
+
+  const res = await fetch(
+    `http://bnicustody.site:8000/database/file/${fileId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token ?? "",
+      },
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(await res.text());
+  }
+
+  revalidatePath(`/database/${customerId}`);
+
+  const data = res.json();
+  return data;
+}

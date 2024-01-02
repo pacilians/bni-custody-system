@@ -14,10 +14,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { columns as getColumns } from "./Columns";
 
 // libs
 import {
-  ColumnDef,
   ColumnFiltersState,
   SortingState,
   flexRender,
@@ -27,20 +27,17 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
   data: TData[];
   searchParameter?: string;
   links?: boolean;
   create?: JSX.Element;
 }
 
-export function DataTable<TData, TValue>({
-  columns,
+export function DataTable<TData extends {}, TValue>({
   data,
   searchParameter,
   links = false,
@@ -48,6 +45,8 @@ export function DataTable<TData, TValue>({
 }: Readonly<DataTableProps<TData, TValue>>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [open, setOpen] = useState(false);
+  const columns = getColumns<TData>(open, setOpen);
 
   const table = useReactTable({
     data,
@@ -117,7 +116,6 @@ export function DataTable<TData, TValue>({
                       toast.promise(getFile(item.id), {
                         loading: `Opening ${item.name}...`,
                         success: (data) => {
-                          console.log(data);
                           const buffer = new Uint8Array(
                             data.data.files.file.data,
                           );
