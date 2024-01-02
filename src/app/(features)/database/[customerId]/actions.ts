@@ -81,3 +81,25 @@ export async function uploadFile(formData: FormData) {
   const data = await res.json();
   return data;
 }
+
+export async function getFile(fileId: string) {
+  const token = cookies().get("token")?.value;
+
+  const res = await fetch(
+    `http://bnicustody.site:8000/database/file/${fileId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token ?? "",
+      },
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(await res.text());
+  }
+
+  const data = res.json();
+  return data;
+}

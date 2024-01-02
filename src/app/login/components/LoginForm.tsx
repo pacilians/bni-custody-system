@@ -35,7 +35,7 @@ export default function LoginForm() {
             loading: "Logging in...",
             success: (data) => {
               router.push("/database");
-              return `Login successful. Welcome back, ${data.data.user.name}!`;
+              return `Login successful. Welcome back ${data.data.user.name}!`;
             },
             error: (err) => {
               const errorObj = JSON.parse(err.message);

@@ -3,7 +3,7 @@ import { getData, getMasterData } from "./actions";
 
 // components
 import Topbar from "@/components/Topbar";
-import { DataTable } from "@/components/ui/data-table";
+import { DataTable } from "./components/data-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { columns } from "./components/Columns";
 import UploadFileDialog, {
@@ -40,9 +40,9 @@ export default async function Customer({
         links={["database", params.customerId]}
       />
       <Tabs defaultValue="mandatory" className="w-full">
-        <TabsList>
-          <TabsTrigger value="mandatory">Mandatory files</TabsTrigger>
-          <TabsTrigger value="additional">Additional files</TabsTrigger>
+        <TabsList className="w-full">
+          <TabsTrigger value="mandatory" className="grow">Mandatory files</TabsTrigger>
+          <TabsTrigger value="additional" className="grow">Additional files</TabsTrigger>
         </TabsList>
         <TabsContent value="mandatory">
           <DataTable
