@@ -29,23 +29,19 @@ export default function LoginForm() {
       <Form {...form}>
         <form
           action={async (formData: FormData) => {
-            try {
-              toast.promise(login(formData), {
-                loading: "Logging in...",
-                success: (data) => {
-                  form.reset();
-                  router.push("/database");
-                  return `Login successful. Welcome back ${data.data.user.name}!`;
-                },
-                error: (err) => {
-                  const errorObj = JSON.parse(err.message);
-                  console.error("Login failed:", errorObj); // Log the error object
-                  return `Login failed: ${errorObj.message}`;
-                },
-              });
-            } catch (err) {
-              console.error("Unexpected error during login:", err); // Log unexpected errors
-            }
+            toast.promise(login(formData), {
+              loading: "Logging in...",
+              success: (data) => {
+                form.reset();
+                router.push("/database");
+                return `Login successful. Welcome back ${data.data.user.name}!`;
+              },
+              error: (err) => {
+                console.log(err.message);
+                const errorObj = JSON.parse(err.message);
+                return `Login failed: ${errorObj.message}`;
+              },
+            });
           }}
           className="flex w-full max-w-sm flex-col gap-3"
         >
