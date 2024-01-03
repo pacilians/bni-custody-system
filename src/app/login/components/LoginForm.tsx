@@ -33,7 +33,7 @@ export default function LoginForm() {
               loading: "Logging in...",
               success: (data) => {
                 form.reset();
-                router.push("/database");
+                router.push("/");
                 return `Login successful. Welcome back ${data.data.user.name}!`;
               },
               error: (err) => {
