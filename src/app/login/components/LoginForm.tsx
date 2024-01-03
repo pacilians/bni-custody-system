@@ -24,66 +24,70 @@ export default function LoginForm() {
   const form = useForm();
 
   return (
-  <div className="flex flex-col">
-  <p className="text-3xl font-semibold text-center mb-8">
-    Custody System
-  </p>
+    <div className="flex flex-col">
+      <p className="mb-8 text-center text-3xl font-semibold">Custody System</p>
       <Form {...form}>
-      <form
-        action={async (formData: FormData) => {
-          toast.promise(login(formData), {
-            loading: "Logging in...",
-            success: (data) => {
-              router.push("/database");
-              return `Login successful. Welcome back ${data.data.user.name}!`;
-            },
-            error: (err) => {
-              const errorObj = JSON.parse(err.message);
-              return `Login failed: ${errorObj.message}`;
-            },
-          });
-        }}
-        className="flex w-full max-w-sm flex-col gap-3"
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  required
-                  {...field}
-                  className="border-gray-200 bg-white px-5 dark:border-gray-900 dark:bg-gray-900/60"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  required
-                  {...field}
-                  className="border-gray-200 bg-white px-5 dark:border-gray-900 dark:bg-gray-900/60"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <SubmitButton />
-      </form>
-    </Form>
-  </div>
+        <form
+          action={async (formData: FormData) => {
+            try {
+              toast.promise(login(formData), {
+                loading: "Logging in...",
+                success: (data) => {
+                  form.reset();
+                  router.push("/database");
+                  return `Login successful. Welcome back ${data.data.user.name}!`;
+                },
+                error: (err) => {
+                  const errorObj = JSON.parse(err.message);
+                  console.error("Login failed:", errorObj); // Log the error object
+                  return `Login failed: ${errorObj.message}`;
+                },
+              });
+            } catch (err) {
+              console.error("Unexpected error during login:", err); // Log unexpected errors
+            }
+          }}
+          className="flex w-full max-w-sm flex-col gap-3"
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    {...field}
+                    className="border-gray-200 bg-white px-5 dark:border-gray-900 dark:bg-gray-900/60"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    required
+                    {...field}
+                    className="border-gray-200 bg-white px-5 dark:border-gray-900 dark:bg-gray-900/60"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <SubmitButton />
+        </form>
+      </Form>
+    </div>
   );
 }

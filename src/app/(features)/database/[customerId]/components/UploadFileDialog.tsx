@@ -70,8 +70,8 @@ export default function UploadFileDialog({
               toast.promise(uploadFile(formData), {
                 loading: "Uploading file...",
                 success: (data) => {
-                  setOpen(false);
                   form.reset();
+                  setOpen(false);
                   return `${data.data.name} successfully uploaded!`;
                 },
                 error: (err) => {
