@@ -37,9 +37,9 @@ export default function LoginForm() {
                 return `Login successful. Welcome back ${data.data.user.name}!`;
               },
               error: (err) => {
-                const errorObj = JSON.parse(err.message).message;
-                // console.log(errorObj);
-                return `Login failed: ${errorObj}`;
+                const errorObj = JSON.parse(err.message);
+                return `Login failed: ${err.message}`;
+                // return `Login failed: ${errorObj.message}`;
               },
             });
           }}
