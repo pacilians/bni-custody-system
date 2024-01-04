@@ -21,9 +21,7 @@ export async function login(formData: FormData) {
   });
 
   if (!res.ok) {
-    const err = await res.text();
-
-    throw new Error(JSON.parse(err).message);
+    throw new Error(await res.text());
   }
 
   const data = await res.json();

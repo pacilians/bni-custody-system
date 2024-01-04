@@ -37,7 +37,7 @@ export default function LoginForm() {
                 return `Login successful. Welcome back ${data.data.user.name}!`;
               },
               error: (err) => {
-                return `Login failed: ${err.message}`;
+                return "Username or password is incorrect";
               },
             });
           }}
