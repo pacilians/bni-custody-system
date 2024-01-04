@@ -39,6 +39,12 @@ export default function LoginForm() {
               error: (err) => {
                 const errorObj = err;
                 console.log("Oh no:", errorObj);
+                const errorMessageMatch =
+                  errorObj.stack.match(/"message":"(.*?)"/);
+                const errorMessage = errorMessageMatch
+                  ? errorMessageMatch[1]
+                  : "Unknown error";
+                return `Error: ${errorMessage}. Please see server logs.`;
               },
             });
           }}

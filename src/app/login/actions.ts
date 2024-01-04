@@ -8,7 +8,7 @@ export async function login(formData: FormData) {
     password: formData.get("password"),
   };
 
-  const res = await fetch(`http://systemcustody.site:8000/login`, {
+  const res = await fetch(`http://bnicustody.site:8000/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
