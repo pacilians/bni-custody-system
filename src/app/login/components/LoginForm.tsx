@@ -38,13 +38,7 @@ export default function LoginForm() {
               },
               error: (err) => {
                 const errorObj = err;
-                console.log(errorObj);
-                // const digest = Number(err.digest);
-                // if (digest === 1462843651 || digest === 375596227) {
-                //   return "Incorrect username or password.";
-                // } else {
-                //   return `Unknown error. Please show this error code to your dev: ${err.digest}`;
-                // }
+                console.log("Oh no:", errorObj);
               },
             });
           }}
