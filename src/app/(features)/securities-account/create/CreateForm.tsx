@@ -116,10 +116,10 @@ export default function CreateForm({ customer = [] }: any) {
           <div className="mt-1 flex flex-row justify-center gap-3">
             <FormField
               control={form.control}
-              name="nama_awal"
+              name="nama"
               render={({ field }) => (
                 <FormItem className="w-1/3">
-                  <label className="mb-2 block font-bold" htmlFor="nama_awal">
+                  <label className="mb-2 block font-bold" htmlFor="nama">
                     Nama/Nama Perusahaan *
                   </label>
                   <Input
@@ -144,7 +144,6 @@ export default function CreateForm({ customer = [] }: any) {
                   <Input
                     type="text"
                     placeholder="..."
-                    required
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "
                   />
@@ -165,7 +164,6 @@ export default function CreateForm({ customer = [] }: any) {
                   </label>
                   <Input
                     type="text"
-                    required
                     placeholder="..."
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "
@@ -178,14 +176,11 @@ export default function CreateForm({ customer = [] }: any) {
           <div className="mt-1 flex flex-row justify-center gap-3">
             <FormField
               control={form.control}
-              name="nama_perusahaan"
+              name="domisili"
               render={({ field }) => (
                 <FormItem className="w-2/3">
-                  <label
-                    className="mb-2 block font-bold"
-                    htmlFor="nama_perusahaan"
-                  >
-                    Nama Perusahaan
+                  <label className="mb-2 block font-bold" htmlFor="domisili">
+                    Domisili/Kewarganegaraan *
                   </label>
                   <Input
                     type="text"
@@ -210,7 +205,6 @@ export default function CreateForm({ customer = [] }: any) {
                   </label>
                   <Input
                     type="text"
-                    
                     placeholder="..."
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "
@@ -230,7 +224,6 @@ export default function CreateForm({ customer = [] }: any) {
                   <Input
                     type="text"
                     placeholder="..."
-                    
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "
                   />
@@ -248,7 +241,6 @@ export default function CreateForm({ customer = [] }: any) {
                   </label>
                   <Input
                     type="text"
-                    
                     placeholder="..."
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "
@@ -272,7 +264,6 @@ export default function CreateForm({ customer = [] }: any) {
                   </label>
                   <Input
                     type="text"
-                    
                     placeholder="..."
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "
@@ -369,7 +360,7 @@ export default function CreateForm({ customer = [] }: any) {
                     className="mb-2 block font-bold"
                     htmlFor="jenis_kelamin"
                   >
-                    Jenis Kelamin 
+                    Jenis Kelamin
                   </label>
                   <Select {...field}>
                     <SelectTrigger className="w-full">
@@ -393,7 +384,7 @@ export default function CreateForm({ customer = [] }: any) {
                     className="mb-2 block font-bold"
                     htmlFor="jenis_pekerjaan"
                   >
-                    Jenis Pekerjaan 
+                    Jenis Pekerjaan
                   </label>
                   <Select {...field}>
                     <SelectTrigger className="w-full">
@@ -450,7 +441,6 @@ export default function CreateForm({ customer = [] }: any) {
                   <Input
                     type="text"
                     placeholder="..."
-                    
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "
                   />
@@ -532,7 +522,6 @@ export default function CreateForm({ customer = [] }: any) {
                   </label>
                   <Input
                     type="text"
-                    required
                     placeholder="..."
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "
@@ -552,7 +541,6 @@ export default function CreateForm({ customer = [] }: any) {
                   <Input
                     type="text"
                     placeholder="..."
-                    required
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "
                   />
@@ -570,7 +558,6 @@ export default function CreateForm({ customer = [] }: any) {
                   </label>
                   <Input
                     type="text"
-                    required
                     placeholder="..."
                     {...field}
                     className="w-full border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60 "

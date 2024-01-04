@@ -54,8 +54,7 @@ export async function addSecurities(formData: FormData) {
       id_customer: formData.get("id_customer") || "",
       kode_bk: formData.get("kode_bk") || "",
       no_rekening_investor: formData.get("no_rekening_investor") || "",
-      nama_perusahaan: formData.get("nama_perusahaan") || "",
-      nama_awal: formData.get("nama_awal") || "",
+      nama: formData.get("nama") || "",
       nama_tengah: formData.get("nama_tengah") || "",
       nama_belakang: formData.get("nama_belakang") || "",
       ktp: formData.get("ktp") || "",
@@ -75,7 +74,8 @@ export async function addSecurities(formData: FormData) {
       kode_negara: formData.get("kode_negara") || "",
       no_telepon: formData.get("no_telepon") || "",
       no_hp: formData.get("no_hp") || "",
-      email: formData.get("email") || ""
+      email: formData.get("email") || "",
+      domisili: formData.get("domisili") || ""
     }),
     cache: "no-store",
     // next: { revalidate: 60, tags: ["master-data-management"],  },
@@ -154,7 +154,7 @@ export async function getCustomers() {
       Authorization: token || "",
     },
     cache: "no-store",
-    next: { revalidate: 60 }, // Revalidate every 60 seconds
+    // next: { revalidate: 60 }, // Revalidate every 60 seconds
   });
 
   if (!res.ok) {

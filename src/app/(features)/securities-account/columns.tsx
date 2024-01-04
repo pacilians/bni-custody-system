@@ -24,8 +24,7 @@ export type Securities = {
   id_customer: string;
   kode_bk: string;
   no_rekening_investor: string;
-  nama_perusahaan: string;
-  nama_awal: string;
+  nama: string;
   nama_tengah: string;
   nama_belakang: string;
   ktp: string;
@@ -44,6 +43,7 @@ export type Securities = {
   kode_negara: string;
   no_telepon: string;
   no_hp: string;
+  domisili: string;
   email: string;
 };
 
@@ -77,21 +77,7 @@ export const columns: ColumnDef<Securities>[] = [
     },
   },
   {
-    accessorKey: "nama_perusahaan",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Nama Perusahaan
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "nama_awal",
+    accessorKey: "nama",
     header: ({ column }) => {
       return (
         <Button
@@ -117,6 +103,14 @@ export const columns: ColumnDef<Securities>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.nama_tengah === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.nama_tengah}</p>;
+    },
   },
   {
     accessorKey: "nama_belakang",
@@ -130,6 +124,14 @@ export const columns: ColumnDef<Securities>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.nama_belakang === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.nama_belakang}</p>;
     },
   },
   {
@@ -145,6 +147,14 @@ export const columns: ColumnDef<Securities>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.ktp === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.ktp}</p>;
+    },
   },
   {
     accessorKey: "npwp",
@@ -158,6 +168,14 @@ export const columns: ColumnDef<Securities>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.npwp === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.npwp}</p>;
     },
   },
   {
@@ -173,6 +191,14 @@ export const columns: ColumnDef<Securities>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.no_paspor === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.no_paspor}</p>;
+    },
   },
   {
     accessorKey: "no_pendaftaran_usaha",
@@ -186,6 +212,14 @@ export const columns: ColumnDef<Securities>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.no_pendaftaran_usaha === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.no_pendaftaran_usaha}</p>;
     },
   },
   {
@@ -248,6 +282,14 @@ export const columns: ColumnDef<Securities>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.jenis_kelamin === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.jenis_kelamin}</p>;
+    },
   },
   {
     accessorKey: "jenis_pekerjaan",
@@ -261,6 +303,14 @@ export const columns: ColumnDef<Securities>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.jenis_pekerjaan === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.jenis_pekerjaan}</p>;
     },
   },
   {
@@ -276,6 +326,14 @@ export const columns: ColumnDef<Securities>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.no_telepon === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.no_telepon}</p>;
+    },
   },
   {
     accessorKey: "email",
@@ -289,6 +347,14 @@ export const columns: ColumnDef<Securities>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    cell: ({ row }) => {
+      const object = row.original;
+
+      if (object.email === "") {
+        return <p>-</p>;
+      }
+      return <p>{object.email}</p>;
     },
   },
 
@@ -323,19 +389,18 @@ export const columns: ColumnDef<Securities>[] = [
 <Field name="investorNPWPRegistrationDate">20040708</Field>
 <Field name="investorSKDNumber"></Field>
 <Field name="investorSKDExpiredDate"></Field>
-<Field name="investorCompanyEstablishmentPlace">JAKARTA</Field>
-<Field name="investorCompanyEstablishmentDate">19571223
-</Field>
-<Field name="investorAddress1"><![CDATA[JL. SINDANGLAYA, MENTENG, MENTENG, KOTA ADM. JAKARTA PUSAT, DKI JAKARTA, 10310]]></Field>
-<Field name="investorAddress2"><![CDATA[]]></Field>
+<Field name="investorCompanyEstablishmentPlace">${current.tempat_pendirian}</Field>
+<Field name="investorCompanyEstablishmentDate">${current.tanggal_pendirian}</Field>
+<Field name="investorAddress1"><![CDATA[${current.alamat_identitas_1}]]></Field>
+<Field name="investorAddress2"><![CDATA[${current.alamat_identitas_2}]]></Field>
 <Field name="investorAddress3"><![CDATA[]]></Field>
-<Field name="investorCity">JAKARTA PUSAT</Field>
-<Field name="investorProvince">JAKARTA</Field>
+<Field name="investorCity">${current.kode_kota}</Field>
+<Field name="investorProvince">${current.kode_provinsi}</Field>
 <Field name="investorPostalCode">10310</Field>
-<Field name="investorCountry">INDONESIA</Field>
-<Field name="investorHomePhone">+62-2131904232</Field>
-<Field name="investorMobilePhone"></Field>
-<Field name="investorEmail">siti.kulsum@iaiglobal.or.id</Field>
+<Field name="investorCountry">${current.kode_negara}</Field>
+<Field name="investorHomePhone">${current.no_telepon}</Field>
+<Field name="investorMobilePhone">${current.no_hp}</Field>
+<Field name="investorEmail">${current.email}</Field>
 <Field name="investorFax"></Field>
 <Field name="investorOtherAddress1"><![CDATA[]]></Field>
 <Field name="investorOtherAddress2"><![CDATA[]]></Field>
@@ -433,7 +498,7 @@ export const columns: ColumnDef<Securities>[] = [
 </Message>`;
                 const blob = new Blob([textData], { type: "text/plain" });
                 const downloadLink = document.createElement("a");
-                downloadLink.download = `${current.nama_perusahaan}.txt`;
+                downloadLink.download = `${current.nama}.txt`;
                 downloadLink.href = window.URL.createObjectURL(blob);
                 downloadLink.style.display = "none";
                 document.body.appendChild(downloadLink);
