@@ -37,9 +37,12 @@ export default function LoginForm() {
                 return `Login successful. Welcome back ${data.data.user.name}!`;
               },
               error: (err) => {
-                // const errorObj = JSON.parse(err.message);
-                return `Login failed: ${err.message}`;
-                // return `Login failed: ${errorObj.message}`;
+                const digest = Number(err.digest);
+                if (digest === 3435787618 || digest === 3577973346) {
+                  return "Incorrect username or password.";
+                } else {
+                  return `Unknown error. Please show this error code to your dev: ${err.digest}`;
+                }
               },
             });
           }}
