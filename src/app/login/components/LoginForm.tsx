@@ -37,12 +37,14 @@ export default function LoginForm() {
                 return `Login successful. Welcome back ${data.data.user.name}!`;
               },
               error: (err) => {
-                const digest = Number(err.digest);
-                if (digest === 1462843651 || digest === 375596227) {
-                  return "Incorrect username or password.";
-                } else {
-                  return `Unknown error. Please show this error code to your dev: ${err.digest}`;
-                }
+                const errorObj = err;
+                console.log(errorObj);
+                // const digest = Number(err.digest);
+                // if (digest === 1462843651 || digest === 375596227) {
+                //   return "Incorrect username or password.";
+                // } else {
+                //   return `Unknown error. Please show this error code to your dev: ${err.digest}`;
+                // }
               },
             });
           }}
