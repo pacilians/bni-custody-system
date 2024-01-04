@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 export async function getUsers() {
   const token = cookies().get("token")?.value;
-  const res = await fetch(`http://bnicustody.site:8000/user/`, {
+  const res = await fetch(`http://systemcustody.site:8000/user/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export async function getUsers() {
 
 export async function getDetailUser(id: any) {
   const token = cookies().get("token")?.value;
-  const res = await fetch(`http://bnicustody.site:8000/user/${id}`, {
+  const res = await fetch(`http://systemcustody.site:8000/user/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export async function getDetailUser(id: any) {
 
 export async function createUser(formData: FormData) {
   const token = cookies().get("token")?.value;
-  const res = await fetch(`http://bnicustody.site:8000/user`, {
+  const res = await fetch(`http://systemcustody.site:8000/user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export async function updateUser(formData: FormData, id: any) {
     description: formData.get("description"),
     role: formData.get("role"),
   });
-  const res = await fetch(`http://bnicustody.site:8000/user/${id}`, {
+  const res = await fetch(`http://systemcustody.site:8000/user/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -106,7 +106,7 @@ export async function updateUser(formData: FormData, id: any) {
 
 export async function deleteUser(id: any) {
   const token = cookies().get("token")?.value;
-  const res = await fetch(`http://bnicustody.site:8000/user/${id}`, {
+  const res = await fetch(`http://systemcustody.site:8000/user/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 export async function getMasterData() {
   const token = cookies().get("token")?.value;
-  const res = await fetch(`http://bnicustody.site:8000/master-data/`, {
+  const res = await fetch(`http://systemcustody.site:8000/master-data/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export async function getMasterData() {
 }
 
 export async function handleAddMandatory(formData: FormData) {
-  const res = await fetch(`http://bnicustody.site:8000/master-data/mandatory`, {
+  const res = await fetch(`http://systemcustody.site:8000/master-data/mandatory`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export async function handleAddMandatory(formData: FormData) {
 
 export async function handleDeleteMandatory(current: any) {
   const res = await fetch(
-    `http://bnicustody.site:8000/master-data/mandatory/${current.id}`,
+    `http://systemcustody.site:8000/master-data/mandatory/${current.id}`,
     {
       method: "DELETE",
       headers: {
@@ -65,7 +65,7 @@ export async function handleDeleteMandatory(current: any) {
 
 export async function handleEdiMandatory(formData: FormData, current: any) {
   const res = await fetch(
-    `http://bnicustody.site:8000/master-data/mandatory/${current.id}`,
+    `http://systemcustody.site:8000/master-data/mandatory/${current.id}`,
     {
       method: "PUT",
       headers: {
@@ -87,7 +87,7 @@ export async function handleEdiMandatory(formData: FormData, current: any) {
 }
 
 export async function handleAddBusiness(formData: FormData) {
-  const res = await fetch(`http://bnicustody.site:8000/master-data/business`, {
+  const res = await fetch(`http://systemcustody.site:8000/master-data/business`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -108,7 +108,7 @@ export async function handleAddBusiness(formData: FormData) {
 
 export async function handleDeleteBusiness(current: any) {
   const res = await fetch(
-    `http://bnicustody.site:8000/master-data/business/${current.id}`,
+    `http://systemcustody.site:8000/master-data/business/${current.id}`,
     {
       method: "DELETE",
       headers: {
@@ -127,7 +127,7 @@ export async function handleDeleteBusiness(current: any) {
 }
 
 export async function handleAddService(formData: FormData) {
-  const res = await fetch(`http://bnicustody.site:8000/master-data/service`, {
+  const res = await fetch(`http://systemcustody.site:8000/master-data/service`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -148,7 +148,7 @@ export async function handleAddService(formData: FormData) {
 
 export async function handleDeleteService(current: any) {
   const res = await fetch(
-    `http://bnicustody.site:8000/master-data/service/${current.id}`,
+    `http://systemcustody.site:8000/master-data/service/${current.id}`,
     {
       method: "DELETE",
       headers: {

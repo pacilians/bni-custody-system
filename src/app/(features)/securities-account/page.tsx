@@ -25,7 +25,7 @@ export default async function UserManagement() {
       <DataTable
         columns={columns}
         data={data.data.securitiesAccounts}
-        searchParameter="name"
+        searchParameter="nama_perusahaan"
         links={false}
         create={
           <Button className="gap-1.5 bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-white dark:hover:bg-orange-600">

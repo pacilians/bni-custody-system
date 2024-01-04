@@ -7,7 +7,7 @@ export async function getData(customerId: string) {
   const token = cookies().get("token")?.value;
 
   const res = await fetch(
-    `http://bnicustody.site:8000/database/${customerId}`,
+    `http://systemcustody.site:8000/database/${customerId}`,
     {
       method: "GET",
       headers: {
@@ -27,7 +27,7 @@ export async function getData(customerId: string) {
 }
 
 export async function getMasterData() {
-  const res = await fetch(`http://bnicustody.site:8000/master-data`, {
+  const res = await fetch(`http://systemcustody.site:8000/master-data`, {
     method: "GET",
     next: { revalidate: 60, tags: ["masterData"] },
   });
@@ -62,7 +62,7 @@ export async function uploadFile(formData: FormData) {
     uploadData.append("type", "ADDITIONAL");
   }
 
-  const url = `http://bnicustody.site:8000/database/file/${customerId}`;
+  const url = `http://systemcustody.site:8000/database/file/${customerId}`;
 
   const res = await fetch(url, {
     method: "POST",
@@ -86,7 +86,7 @@ export async function getFile(fileId: string) {
   const token = cookies().get("token")?.value;
 
   const res = await fetch(
-    `http://bnicustody.site:8000/database/file/${fileId}`,
+    `http://systemcustody.site:8000/database/file/${fileId}`,
     {
       method: "GET",
       headers: {
@@ -114,7 +114,7 @@ export async function deleteFile(fileId: string) {
   const customerId = pathSegments[pathSegments.length - 1];
 
   const res = await fetch(
-    `http://bnicustody.site:8000/database/file/${fileId}`,
+    `http://systemcustody.site:8000/database/file/${fileId}`,
     {
       method: "DELETE",
       headers: {

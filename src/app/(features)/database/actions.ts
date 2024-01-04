@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 export async function getData() {
   const token = cookies().get("token")?.value;
 
-  const res = await fetch(`http://bnicustody.site:8000/database`, {
+  const res = await fetch(`http://systemcustody.site:8000/database`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export async function addCustomer(
     bank_account: bankAccount,
     board_of_director: bod,
   };
-  const res = await fetch(`http://bnicustody.site:8000/database`, {
+  const res = await fetch(`http://systemcustody.site:8000/database`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
