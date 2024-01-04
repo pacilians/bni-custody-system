@@ -11,7 +11,8 @@ export async function getData() {
       "Content-Type": "application/json",
       Authorization: token ?? "",
     },
-    next: { revalidate: 60 }, // Revalidate every 60 seconds
+    cache: "no-store",
+    // next: { revalidate: 60 }, // Revalidate every 60 seconds
   });
 
   if (!res.ok) {
@@ -58,5 +59,26 @@ export async function addCustomer(
   }
   const data = await res.json();
   // revalidateTag('master-data-management')
+  return data;
+}
+
+
+export async function deleteCustomer(id: any) {
+  const token = cookies().get("token")?.value;
+  const res = await fetch(`http://systemcustody.site:8000/database/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token ?? "",
+    },
+    cache: "no-store",
+    // next: { revalidate: 60, tags: ["master-data-management"],  },
+  });
+
+  if (!res.ok) {
+    throw new Error(await res.text());
+  }
+
+  const data = res.json();
   return data;
 }

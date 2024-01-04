@@ -10,6 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
+import { deleteCustomer } from "../actions";
 
 // libs
 import { ColumnDef } from "@tanstack/react-table";
@@ -23,12 +25,12 @@ export type DOB = {
   description: string;
   photo: null | string;
   birth_date: any;
-}
+};
 
 export type BankAccount = {
   number: string;
   name: string;
-}
+};
 
 export type Customer = {
   id: any;
@@ -46,8 +48,7 @@ export type Customer = {
   bank_account: BankAccount[];
   createdAt: string;
   updatedAt: string;
-}
-
+};
 
 export const columns: ColumnDef<Customer>[] = [
   {
@@ -131,7 +132,26 @@ export const columns: ColumnDef<Customer>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View customer details</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={async () => {
+                toast.promise(deleteCustomer(customer.id), {
+                  loading: "Deleting...",
+                  success: (data) => {
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 2000);
+                    return `Successfull delete sc account`;
+                  },
+                  error: (err) => {
+                    const errorObj = JSON.parse(err.message);
+                    return `Failed delete sc account`;
+                  },
+                });
+                return;
+              }}
+            >
+              Delete Customer
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

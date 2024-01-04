@@ -155,6 +155,25 @@ export default function CreateForm({ initialData }: any) {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <label className="mb-2 block font-bold" htmlFor="password">
+                  Password *
+                </label>
+                <Input
+                  type="text"
+                  required
+                  placeholder="Password"
+                  {...field}
+                  className="border-gray-200 bg-white px-5 dark:border-gray-900 dark:bg-gray-900/60"
+                />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <div className="flex flex-row justify-center">
             <Button

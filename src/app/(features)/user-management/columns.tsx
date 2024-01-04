@@ -28,6 +28,15 @@ export type User = {
   description: string;
 };
 
+function maskPassword(password: string) {
+  const visibleChars = Math.min(1, password.length); // Ensure only the first character is visible
+  const start = password.slice(0, visibleChars); // Extract the first character
+  const end = password.slice(-1); // Extract the last character
+  const middle = '*'.repeat(Math.max(0, 5 - visibleChars * 2)); // Create a string of stars for the middle
+  return start + middle + end;
+}
+
+// for ADMIN
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
@@ -86,6 +95,26 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
+    accessorKey: "password",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Password
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const object = row.original;
+      const password = object.password
+      const maskedPassword = maskPassword(password)
+      return <p>{maskedPassword}</p>;
+    },
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const user = row.original;
@@ -137,6 +166,67 @@ export const columns: ColumnDef<User>[] = [
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+      );
+    },
+  },
+];
+
+
+// for USER
+export const user_columns: ColumnDef<User>[] = [
+  {
+    accessorKey: "name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "npp",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          NPP
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "role",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Role
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
       );
     },
   },

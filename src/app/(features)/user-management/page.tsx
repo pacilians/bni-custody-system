@@ -3,10 +3,11 @@ import { getUsers } from "./actions";
 
 // components
 import Topbar from "@/components/Topbar";
+import { cookies } from "next/headers";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import Link from "next/link";
-import { columns } from "./columns";
+import { columns, user_columns } from "./columns";
 
 // libs
 import { Metadata } from "next";
@@ -18,12 +19,18 @@ export const metadata: Metadata = {
 
 export default async function UserManagement() {
   const data = await getUsers();
-
+  const role = cookies().get("role")?.value;
+  let col = null
+  if(role === 'admin'){
+    col = columns
+  }else{
+    col = user_columns
+  }
   return (
     <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
       <Topbar data={["User Management"]} links={["user-management"]} />
       <DataTable
-        columns={columns}
+        columns={col}
         data={data.data.users}
         searchParameter="name"
         links={false}

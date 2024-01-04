@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 export async function getUsers() {
   const token = cookies().get("token")?.value;
-  const res = await fetch(`http://systemcustody.site:8000/user/`, {
+  const res = await fetch(`http://systemcustody.site:8000/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -56,6 +56,7 @@ export async function createUser(formData: FormData) {
       npp: formData.get("npp"),
       description: formData.get("description"),
       role: formData.get("role"),
+      password: formData.get("password"),
     }),
     cache: "no-store",
     // next: { revalidate: 60, tags: ["master-data-management"],  },
@@ -102,7 +103,6 @@ export async function updateUser(formData: FormData, id: any) {
   const data = res.json();
   return data;
 }
-
 
 export async function deleteUser(id: any) {
   const token = cookies().get("token")?.value;
