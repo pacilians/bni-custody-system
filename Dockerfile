@@ -17,4 +17,4 @@ COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app /app
 EXPOSE 3000
 EXPOSE 80
-CMD [ "pnpm", "dev" ]
+CMD [ "pnpm", "prod" ]
