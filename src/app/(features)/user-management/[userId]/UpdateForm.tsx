@@ -1,6 +1,6 @@
 "use client";
 
-import { createUser } from "../actions";
+import { updateUser } from "../actions";
 
 // componets
 import { Button } from "@/components/ui/button";
@@ -32,24 +32,23 @@ export default function UpdateForm({
     description: "",
     email: "",
   },
+  id,
 }: any) {
   const router = useRouter();
   const form = useForm();
   const { pending } = useFormStatus();
-
   return (
     <section className="bg-base-200 flex w-full justify-center rounded-3xl p-10 shadow-md">
       <Form {...form}>
         <form
           action={async (formData: FormData) => {
-            toast.promise(createUser(formData), {
-              loading: "Logging in...",
+            toast.promise(updateUser(formData, id, data), {
+              loading: "Updating...",
               success: (data) => {
                 router.push("/user-management");
                 return `Successfull creating user`;
               },
               error: (err) => {
-                const errorObj = JSON.parse(err.message);
                 return `Failed creating user`;
               },
             });
@@ -67,7 +66,6 @@ export default function UpdateForm({
                   </label>
                   <Input
                     type="text"
-                    required
                     placeholder={data.name}
                     {...field}
                     className="border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60"
@@ -86,7 +84,6 @@ export default function UpdateForm({
                   </label>
                   <Input
                     type="text"
-                    required
                     placeholder={data.npp}
                     {...field}
                     className="border-gray-200 bg-white px-10 dark:border-gray-900 dark:bg-gray-900/60"
@@ -128,7 +125,6 @@ export default function UpdateForm({
                 </label>
                 <Input
                   type="text"
-                  required
                   placeholder={data.description}
                   {...field}
                   className="border-gray-200 bg-white px-5 dark:border-gray-900 dark:bg-gray-900/60"
@@ -147,7 +143,6 @@ export default function UpdateForm({
                 </label>
                 <Input
                   type="email"
-                  required
                   placeholder={data.email}
                   {...field}
                   className="border-gray-200 bg-white px-5 dark:border-gray-900 dark:bg-gray-900/60"
@@ -164,7 +159,7 @@ export default function UpdateForm({
               aria-disabled={pending}
               disabled={pending}
             >
-              Add User
+              Update User
             </Button>
           </div>
         </form>

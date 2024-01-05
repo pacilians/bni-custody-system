@@ -111,67 +111,69 @@ export default function Service({ initialData }: any) {
         </Dialog>
       </div>
 
-      {data.map((ctx: Service, index: number) => {
-        return (
-          <div
-            className="badge badge-outline group relative hover:text-transparent"
-            key={index}
-          >
-            {ctx.name}
+      <div className="flex flex-row flex-wrap gap-5">
+        {data.map((ctx: Service, index: number) => {
+          return (
+            <div
+              className="badge bg-gray-100 rounded-2xl p-2 badge-outline group relative hover:text-transparent"
+              key={index}
+            >
+              {ctx.name}
 
-            {/* Delete Service */}
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  className="absolute inset-0 flex h-full w-full items-center justify-center rounded-2xl border border-gray-300 text-xs text-gray-600 opacity-0 group-hover:opacity-100"
-                  variant="outline"
-                >
-                  x
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle>Delete Service Category</DialogTitle>
-                  <DialogDescription>
-                    Are you sure want delete this service
-                  </DialogDescription>
-                </DialogHeader>
-
-                <Form {...form}>
-                  <form
-                    action={async (formData: FormData) => {
-                      toast.promise(handleDeleteService(ctx), {
-                        loading: "Deleting...",
-                        success: (data) => {
-                          router.refresh();
-                          return "Sucessful delete service category";
-                        },
-                        error: (err) => {
-                          const errorObj = JSON.parse(err.message);
-                          return `failed: ${errorObj.message}`;
-                        },
-                      });
-                    }}
-                    className="flex w-full max-w-sm flex-col gap-3"
+              {/* Delete Service */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    className="absolute inset-0 flex h-full w-full items-center justify-center rounded-2xl border border-gray-300 text-xs text-gray-600 opacity-0 group-hover:opacity-100"
+                    variant="outline"
                   >
-                    <DialogClose asChild>
-                      <Button
-                        type="submit"
-                        variant="ghost"
-                        className="group mt-2 *:transition hover:bg-gray-200 dark:hover:bg-slate-900"
-                        aria-disabled={pending}
-                        disabled={pending}
-                      >
-                        Delete Service
-                      </Button>
-                    </DialogClose>
-                  </form>
-                </Form>
-              </DialogContent>
-            </Dialog>
-          </div>
-        );
-      })}
+                    x
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Delete Service Category</DialogTitle>
+                    <DialogDescription>
+                      Are you sure want delete this service
+                    </DialogDescription>
+                  </DialogHeader>
+
+                  <Form {...form}>
+                    <form
+                      action={async (formData: FormData) => {
+                        toast.promise(handleDeleteService(ctx), {
+                          loading: "Deleting...",
+                          success: (data) => {
+                            router.refresh();
+                            return "Sucessful delete service category";
+                          },
+                          error: (err) => {
+                            const errorObj = JSON.parse(err.message);
+                            return `failed: ${errorObj.message}`;
+                          },
+                        });
+                      }}
+                      className="flex w-full max-w-sm flex-col gap-3"
+                    >
+                      <DialogClose asChild>
+                        <Button
+                          type="submit"
+                          variant="ghost"
+                          className="group mt-2 *:transition hover:bg-gray-200 dark:hover:bg-slate-900"
+                          aria-disabled={pending}
+                          disabled={pending}
+                        >
+                          Delete Service
+                        </Button>
+                      </DialogClose>
+                    </form>
+                  </Form>
+                </DialogContent>
+              </Dialog>
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 }

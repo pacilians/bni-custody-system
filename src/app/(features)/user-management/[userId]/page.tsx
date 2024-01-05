@@ -20,11 +20,10 @@ export default async function UserManagement({
 }>) {
   const data = await getDetailUser(params.userId);
   const user = data.data.user;
-  console.log(user);
   return (
     <main className="relative flex min-h-svh grow flex-col bg-white px-10 py-20 dark:bg-gray-900/40">
       <Topbar data={["User Management"]} links={["user-management"]} />
-      <UpdateForm data={user}/>
+      <UpdateForm data={user} id={params.userId}/>
     </main>
   );
 }

@@ -70,27 +70,21 @@ export async function createUser(formData: FormData) {
   return data;
 }
 
-export async function updateUser(formData: FormData, id: any) {
+export async function updateUser(formData: FormData, id: any, currentData:any) {
   const token = cookies().get("token")?.value;
-  console.log({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    npp: formData.get("npp"),
-    description: formData.get("description"),
-    role: formData.get("role"),
-  });
   const res = await fetch(`http://systemcustody.site:8000/user/${id}`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: token ?? "",
     },
     body: JSON.stringify({
-      name: formData.get("name"),
-      email: formData.get("email"),
-      npp: formData.get("npp"),
-      description: formData.get("description"),
-      role: formData.get("role"),
+      name: formData.get("name") || currentData['name'],
+      email: formData.get("email") || currentData['email'],
+      npp: formData.get("npp") || currentData['npp'],
+      description: formData.get("description") || currentData['description'],
+      role: formData.get("role") || currentData['role'],
+      password: currentData['password']
     }),
     cache: "no-store",
     // next: { revalidate: 60, tags: ["master-data-management"],  },
