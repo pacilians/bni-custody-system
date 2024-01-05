@@ -511,7 +511,7 @@ export const columns: ColumnDef<Securities>[] = [
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
-                alert("[ON DEVELOPMENT]");
+                alert("[On Progress]");
               }}
             >
               Update Securities

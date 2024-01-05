@@ -115,7 +115,7 @@ export default function Service({ initialData }: any) {
         {data.map((ctx: Service, index: number) => {
           return (
             <div
-              className="badge bg-gray-100 rounded-2xl p-2 badge-outline group relative hover:text-transparent"
+              className="badge rounded-2xl p-2 badge-outline group relative hover:text-transparent"
               key={index}
             >
               {ctx.name}

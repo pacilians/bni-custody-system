@@ -114,7 +114,7 @@ export default function Business({ initialData }: any) {
         {data.map((ctx: Business, index: number) => {
           return (
             <div
-              className="badge bg-gray-100 rounded-2xl p-2 badge-outline w-1/8 group relative hover:text-transparent"
+              className="badg rounded-2xl p-2 badge-outline w-1/8 group relative hover:text-transparent"
               key={index}
             >
               {ctx.name}
